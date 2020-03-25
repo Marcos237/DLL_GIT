@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DomainValidation" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Dll.Helpers">
+      <HintPath>..\..\Dll.Helpers\Dll.Helpers\bin\Debug\netstandard2.0\Dll.Helpers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

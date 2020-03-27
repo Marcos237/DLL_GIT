@@ -5,12 +5,11 @@ namespace Dll.Domain.Entity
 {
     public partial class Log:Entity
     {
-        public int IdUsuarioLogado { get; private set; }
+        public int UsuarioId { get; private set; }
         public DateTime DataLog { get; private set; }
         public string Descricao { get; set; }
         public string IP { get; set; }
         public string Navegador { get; set; }
-        public DateTime DataInclusao { get; set; }
 
         public Log()
         {
@@ -18,7 +17,7 @@ namespace Dll.Domain.Entity
         }
         public Log(int idusuarioLogado, string descricao, string ip, string maquina)
         {
-            IdUsuarioLogado = idusuarioLogado;
+            UsuarioId = idusuarioLogado;
             DataLog = DateTime.Now;
             Descricao = descricao;
             IP = ip;

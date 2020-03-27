@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dll.Infra.Data.Migrations
 {
     [DbContext(typeof(UsuarioDbContext))]
-    [Migration("20200326032827_inital")]
-    partial class inital
+    [Migration("20200327024406_Log_02")]
+    partial class Log_02
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,12 +263,24 @@ namespace Dll.Infra.Data.Migrations
                         .HasColumnType("varchar(max)")
                         .IsUnicode(false);
 
-                    b.Property<int>("IdUsuarioLogado")
+                    b.Property<string>("IP")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<string>("Navegador")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
+
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdUsuarioLogado");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Log");
                 });
@@ -346,38 +358,6 @@ namespace Dll.Infra.Data.Migrations
                     b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("Dll.Domain.Entity.UsuarioLogado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("IP")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<int>("IdUsuaruio")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Maquina")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdUsuaruio");
-
-                    b.ToTable("UsuarioLogado");
-                });
-
             modelBuilder.Entity("Dll.Domain.Entity.AspNetRoleClaims", b =>
                 {
                     b.HasOne("Dll.Domain.Entity.AspNetRoles", "Role")
@@ -440,10 +420,10 @@ namespace Dll.Infra.Data.Migrations
 
             modelBuilder.Entity("Dll.Domain.Entity.Log", b =>
                 {
-                    b.HasOne("Dll.Domain.Entity.UsuarioLogado", "IdUsuaruioLogadoNavigation")
-                        .WithMany("Log")
-                        .HasForeignKey("IdUsuarioLogado")
-                        .HasConstraintName("fk_UsuarioLogadoLog")
+                    b.HasOne("Dll.Domain.Entity.Usuario", null)
+                        .WithMany("UsuarioLogado")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -485,15 +465,6 @@ namespace Dll.Infra.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("UsuarioId");
                         });
-                });
-
-            modelBuilder.Entity("Dll.Domain.Entity.UsuarioLogado", b =>
-                {
-                    b.HasOne("Dll.Domain.Entity.Usuario", "IdUsuaruioNavigation")
-                        .WithMany("UsuarioLogado")
-                        .HasForeignKey("IdUsuaruio")
-                        .HasConstraintName("fk_UsuarioUsuarioLogado")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

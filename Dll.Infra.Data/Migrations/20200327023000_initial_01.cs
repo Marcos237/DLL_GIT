@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dll.Infra.Data.Migrations
 {
-    public partial class inital : Migration
+    public partial class initial_01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -208,6 +208,31 @@ namespace Dll.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Log",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuarioLogado = table.Column<int>(nullable: false),
+                    DataLog = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Descricao = table.Column<string>(unicode: false, nullable: false),
+                    IP = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
+                    Navegador = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
+                    DataInclusao = table.Column<DateTime>(nullable: false),
+                    UsuarioId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Log", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Log_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Telefones",
                 columns: table => new
                 {
@@ -224,49 +249,6 @@ namespace Dll.Infra.Data.Migrations
                         name: "fk_UsuarioTelefone",
                         column: x => x.IdUsuaruio,
                         principalTable: "Usuario",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UsuarioLogado",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdUsuaruio = table.Column<int>(nullable: false),
-                    IP = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
-                    Maquina = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
-                    DataInclusao = table.Column<DateTime>(type: "datetime", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UsuarioLogado", x => x.Id);
-                    table.ForeignKey(
-                        name: "fk_UsuarioUsuarioLogado",
-                        column: x => x.IdUsuaruio,
-                        principalTable: "Usuario",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Log",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdUsuarioLogado = table.Column<int>(nullable: false),
-                    DataLog = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Descricao = table.Column<string>(unicode: false, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Log", x => x.Id);
-                    table.ForeignKey(
-                        name: "fk_UsuarioLogadoLog",
-                        column: x => x.IdUsuarioLogado,
-                        principalTable: "UsuarioLogado",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -316,9 +298,9 @@ namespace Dll.Infra.Data.Migrations
                 column: "IdUsuaruio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Log_IdUsuarioLogado",
+                name: "IX_Log_UsuarioId",
                 table: "Log",
-                column: "IdUsuarioLogado");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Telefones_IdUsuaruio",
@@ -329,11 +311,6 @@ namespace Dll.Infra.Data.Migrations
                 name: "IX_Usuario_IdUser",
                 table: "Usuario",
                 column: "IdUser");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsuarioLogado_IdUsuaruio",
-                table: "UsuarioLogado",
-                column: "IdUsuaruio");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -367,9 +344,6 @@ namespace Dll.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "UsuarioLogado");
 
             migrationBuilder.DropTable(
                 name: "Usuario");

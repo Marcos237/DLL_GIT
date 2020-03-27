@@ -16,6 +16,7 @@ namespace Dll.Infra.Data
         public UsuarioDbContext(DbContextOptions<UsuarioDbContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }

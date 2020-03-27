@@ -39,7 +39,7 @@ namespace Dll.Application.Service
             }
             else
             {
-                _usuarioLogado.RegistrarLog(new Log(id, result.notifications.FirstOrDefault().Menssagem, ip, maquina));
+                _usuarioLogado.RegistrarLog(new Log(id, result.Success, ip, maquina));
                 Commit();
             }
 

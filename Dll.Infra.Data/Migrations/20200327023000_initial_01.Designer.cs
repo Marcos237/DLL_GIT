@@ -4,14 +4,16 @@ using Dll.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dll.Infra.Data.Migrations
 {
     [DbContext(typeof(UsuarioDbContext))]
-    partial class UsuarioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200327023000_initial_01")]
+    partial class initial_01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,6 +255,9 @@ namespace Dll.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DataLog")
                         .HasColumnType("datetime");
 
@@ -267,13 +272,16 @@ namespace Dll.Infra.Data.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<int>("IdUsuarioLogado")
+                        .HasColumnType("int");
+
                     b.Property<string>("Navegador")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int?>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -420,9 +428,7 @@ namespace Dll.Infra.Data.Migrations
                 {
                     b.HasOne("Dll.Domain.Entity.Usuario", null)
                         .WithMany("UsuarioLogado")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("Dll.Domain.Entity.Telefones", b =>

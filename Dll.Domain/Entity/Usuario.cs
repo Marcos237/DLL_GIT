@@ -12,14 +12,14 @@ namespace Dll.Domain.Entity
         public virtual AspNetUsers IdUserNavigation { get; set; }
         public virtual ICollection<Endereco> Endereco { get; set; }
         public virtual ICollection<Telefones> Telefones { get; set; }
-        public virtual ICollection<UsuarioLogado> UsuarioLogado { get; set; }
+        public virtual ICollection<Log> UsuarioLogado { get; set; }
 
 
         public Usuario()
         {
             Endereco = new HashSet<Endereco>();
             Telefones = new HashSet<Telefones>();
-            UsuarioLogado = new HashSet<UsuarioLogado>();
+            UsuarioLogado = new HashSet<Log>();
             ValidationResult = new ValidationResult();
         }
 

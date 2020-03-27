@@ -6,11 +6,15 @@ using Dll.Domain.DTO;
 using Dll.Domain.Entity;
 using Dll.Domain.Interfaces.Repository;
 using Dll.Domain.Interfaces.Services;
+using Dll.Domain.ValueObjects;
 using Dll.Infra.Data.Interface;
 using KissLog;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,17 +25,16 @@ namespace Dll.Application.Service
         private readonly IUsuarioService _usuarioService;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger _logger;
-
+        private readonly ILog _log;
 
         public UsuarioAppService(IUsuarioService usuarioService, IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager, ILogger logger)
+            SignInManager<IdentityUser> signInManager, ILog log)
             : base(unitOfWork)
         {
             _usuarioService = usuarioService;
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
+            _log = log;
         }
 
         public UsuarioViewModel AdicionarAspNetUser(UsuarioViewModel model)
@@ -60,7 +63,7 @@ namespace Dll.Application.Service
                 _userManager.DeleteAsync(user);
             }
             model = UsuarioAdapterToViewModel.EntityToViewModel(query);
-
+            _log.RegistrarLog(model.ValidationResult, _userManager, _signInManager);
             return model;
         }
 
@@ -77,6 +80,7 @@ namespace Dll.Application.Service
                 query.validateResult.Success = "Cadastro atualizado com sucesso!";
             }
             model = UsuarioEditAdapterToViwModel.EntityToViewModel(query);
+            _log.RegistrarLog(model.ValidationResult, _userManager, _signInManager);
             return model;
         }
 
@@ -85,7 +89,6 @@ namespace Dll.Application.Service
             var dados = _usuarioService.BuscarTudoPorCpf(cpf);
 
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
-
             return result;
         }
 
@@ -94,7 +97,6 @@ namespace Dll.Application.Service
             var dados = _usuarioService.BuscarPorEmail(email);
 
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
-
             return result;
         }
 
@@ -102,7 +104,6 @@ namespace Dll.Application.Service
         {
             var dados = _usuarioService.BuscarPorId(id);
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
-
             return result;
         }
 
@@ -116,8 +117,8 @@ namespace Dll.Application.Service
 
         public List<UsuarioDTO> BuscarTodosUsuario()
         {
- 
-            var result =  _usuarioService.BuscarTodosUsuario();
+
+            var result = _usuarioService.BuscarTodosUsuario();
             return result;
         }
 

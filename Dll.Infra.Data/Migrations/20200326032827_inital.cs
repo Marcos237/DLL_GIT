@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dll.Infra.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -235,9 +235,9 @@ namespace Dll.Infra.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdUsuaruio = table.Column<int>(nullable: false),
-                    Login = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
+                    IP = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     Maquina = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
-                    DataInclusa0 = table.Column<DateTime>(type: "datetime", nullable: false)
+                    DataInclusao = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -256,7 +256,7 @@ namespace Dll.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdUsuaruioLogado = table.Column<int>(nullable: false),
+                    IdUsuarioLogado = table.Column<int>(nullable: false),
                     DataLog = table.Column<DateTime>(type: "datetime", nullable: false),
                     Descricao = table.Column<string>(unicode: false, nullable: false)
                 },
@@ -265,7 +265,7 @@ namespace Dll.Infra.Data.Migrations
                     table.PrimaryKey("PK_Log", x => x.Id);
                     table.ForeignKey(
                         name: "fk_UsuarioLogadoLog",
-                        column: x => x.IdUsuaruioLogado,
+                        column: x => x.IdUsuarioLogado,
                         principalTable: "UsuarioLogado",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -316,9 +316,9 @@ namespace Dll.Infra.Data.Migrations
                 column: "IdUsuaruio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Log_IdUsuaruioLogado",
+                name: "IX_Log_IdUsuarioLogado",
                 table: "Log",
-                column: "IdUsuaruioLogado");
+                column: "IdUsuarioLogado");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Telefones_IdUsuaruio",

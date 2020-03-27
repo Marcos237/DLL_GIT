@@ -30,7 +30,6 @@ namespace Dll.Infra.Data
         public virtual DbSet<Permissao> Permissao { get; set; }
         public virtual DbSet<Telefones> Telefones { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<UsuarioLogado> UsuarioLogado { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -176,11 +175,15 @@ namespace Dll.Infra.Data
                     .IsRequired()
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdUsuaruioLogadoNavigation)
-                    .WithMany(p => p.Log)
-                    .HasForeignKey(d => d.IdUsuarioLogado)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_UsuarioLogadoLog");
+                entity.Property(e => e.IP)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Navegador)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Permissao>(entity =>
@@ -241,29 +244,6 @@ namespace Dll.Infra.Data
                     .HasConstraintName("fk_AspNetUsers");
                 entity.Ignore(c => c.validateResult);
             });
-
-
-            modelBuilder.Entity<UsuarioLogado>(entity =>
-            {
-                entity.Property(e => e.DataInclusao).HasColumnType("datetime");
-
-                entity.Property(e => e.IP)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Maquina)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.IdUsuaruioNavigation)
-                    .WithMany(p => p.UsuarioLogado)
-                    .HasForeignKey(d => d.IdUsuaruio)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_UsuarioUsuarioLogado");
-            });
-
 
             OnModelCreatingPartial(modelBuilder);
         }

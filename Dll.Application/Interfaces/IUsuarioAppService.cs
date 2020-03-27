@@ -1,6 +1,7 @@
 ﻿using Dll.Application.Model;
 using Dll.Domain.DTO;
 using Dll.Domain.Interfaces.Services;
+using Dll.Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

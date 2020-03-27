@@ -2,13 +2,10 @@
 using Dll.Domain.DTO;
 using Dll.Domain.Entity;
 using Dll.Domain.Interfaces.Repository;
-using Dll.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace Dll.Infra.Data.Repository

@@ -8,6 +8,9 @@ namespace Dll.Domain.Interfaces.Repository
     public interface ILogRepository:IRepository<Log>
     {
         Log RegistrarLog(Log log);
+        Log BuscarPorDataLog(DateTime data);
+        List<Log> BuscarTodosLog();
+
     }
 
 }

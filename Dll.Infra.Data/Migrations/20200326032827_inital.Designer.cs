@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dll.Infra.Data.Migrations
 {
     [DbContext(typeof(UsuarioDbContext))]
-    [Migration("20200323051738_Inicial")]
-    partial class Inicial
+    [Migration("20200326032827_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,12 +263,12 @@ namespace Dll.Infra.Data.Migrations
                         .HasColumnType("varchar(max)")
                         .IsUnicode(false);
 
-                    b.Property<int>("IdUsuaruioLogado")
+                    b.Property<int>("IdUsuarioLogado")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdUsuaruioLogado");
+                    b.HasIndex("IdUsuarioLogado");
 
                     b.ToTable("Log");
                 });
@@ -353,17 +353,17 @@ namespace Dll.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DataInclusa0")
+                    b.Property<DateTime>("DataInclusao")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("IdUsuaruio")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Login")
+                    b.Property<string>("IP")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50)
                         .IsUnicode(false);
+
+                    b.Property<int>("IdUsuaruio")
+                        .HasColumnType("int");
 
                     b.Property<string>("Maquina")
                         .IsRequired()
@@ -442,7 +442,7 @@ namespace Dll.Infra.Data.Migrations
                 {
                     b.HasOne("Dll.Domain.Entity.UsuarioLogado", "IdUsuaruioLogadoNavigation")
                         .WithMany("Log")
-                        .HasForeignKey("IdUsuaruioLogado")
+                        .HasForeignKey("IdUsuarioLogado")
                         .HasConstraintName("fk_UsuarioLogadoLog")
                         .IsRequired();
                 });

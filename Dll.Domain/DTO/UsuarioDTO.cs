@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dll.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,6 +16,11 @@ namespace Dll.Domain.DTO
         public string CPF { get; set; }
         public string Celular { get; set; }
         public string Telefone { get; set; }
-        public Domain.ValueObjects.ValidationResult ValidationResult { get; set; }
+        public ValidationResult ValidationResult { get; set; }
+
+        public UsuarioDTO()
+        {
+            ValidationResult = new ValidationResult();
+        }
     }
 }

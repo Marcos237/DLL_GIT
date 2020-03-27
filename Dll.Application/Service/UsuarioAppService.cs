@@ -47,14 +47,16 @@ namespace Dll.Application.Service
 
             var result = _userManager.CreateAsync(user, model.Password);
             var query = _usuarioService.AdicionarAspNetUser(usuario);
-
+            model = UsuarioAdapterToViewModel.EntityToViewModel(query);
             if (result.Result.Succeeded && query.validateResult.IsValid)
             {
                 query.validateResult.Success = "Cadastro realizado com sucesso!";
+                model.ValidationResult.Info = "Registro Sucesso";
                 Commit();
             }
             else
             {
+                model.ValidationResult.Info = "Registrar Erro";
                 var erros = result.Result.Errors;
                 foreach (var item in erros)
                 {
@@ -62,7 +64,6 @@ namespace Dll.Application.Service
                 }
                 _userManager.DeleteAsync(user);
             }
-            model = UsuarioAdapterToViewModel.EntityToViewModel(query);
             _log.RegistrarLog(model.ValidationResult, _userManager, _signInManager);
             return model;
         }
@@ -73,13 +74,17 @@ namespace Dll.Application.Service
 
             BeginTransaction();
             var query = _usuarioService.AtualizarAspNetUser(usuario);
-
+            model = UsuarioEditAdapterToViwModel.EntityToViewModel(query);
             if (query.validateResult.IsValid)
             {
                 Commit();
                 query.validateResult.Success = "Cadastro atualizado com sucesso!";
+                model.ValidationResult.Info = "Atualizar Sucesso";
             }
-            model = UsuarioEditAdapterToViwModel.EntityToViewModel(query);
+            else
+            {
+                model.ValidationResult.Info = "Atualizar Erro";
+            }
             _log.RegistrarLog(model.ValidationResult, _userManager, _signInManager);
             return model;
         }
@@ -89,6 +94,9 @@ namespace Dll.Application.Service
             var dados = _usuarioService.BuscarTudoPorCpf(cpf);
 
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
+
+            result.ValidationResult.Info = "BuscarPorCpf";
+            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -97,6 +105,8 @@ namespace Dll.Application.Service
             var dados = _usuarioService.BuscarPorEmail(email);
 
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
+            result.ValidationResult.Info = "BuscarPorEmail";
+            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -104,6 +114,9 @@ namespace Dll.Application.Service
         {
             var dados = _usuarioService.BuscarPorId(id);
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
+
+            result.ValidationResult.Info = "BuscarPorId";
+            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -112,6 +125,8 @@ namespace Dll.Application.Service
             var dados = _usuarioService.BuscarPorNome(nome);
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
 
+            result.ValidationResult.Info = "BuscarPorNome";
+            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -119,6 +134,12 @@ namespace Dll.Application.Service
         {
 
             var result = _usuarioService.BuscarTodosUsuario();
+
+            foreach (var item in result)
+            {
+                item.ValidationResult.Info = "BuscarTodosUsuario";
+                _log.RegistrarLog(item.ValidationResult, _userManager, _signInManager);
+            }
             return result;
         }
 

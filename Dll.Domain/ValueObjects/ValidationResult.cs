@@ -9,6 +9,7 @@ namespace Dll.Domain.ValueObjects
     {
         public string Success { get; set; }
         public string Error { get; set; }
+        public string Info { get; set; }
         public bool IsValid { get; set; }
 
         public List<Notification> notifications { get; set; }

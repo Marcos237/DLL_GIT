@@ -5,7 +5,7 @@ using Dll.Domain.ValueObjects;
 using Dll.Infra.Data.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System.Linq;
+using System.Text;
 
 namespace Dll.Application.Service
 {
@@ -28,18 +28,22 @@ namespace Dll.Application.Service
             var id = i;
             var ip = _httpContextAccessor.HttpContext.Connection.LocalIpAddress.ToString();
             var maquina = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"];
+            var mensagem = new StringBuilder();
 
             if (result.notifications.Count > 0 && signInManager.Context.User.Identity.IsAuthenticated)
             {
+                mensagem.Append("Erro: ");
                 foreach (var item in result.notifications)
                 {
-                    _usuarioLogado.RegistrarLog(new Log(id, item.Menssagem, ip, maquina));
-                    Commit();
+                    mensagem.Append(item.Menssagem + "; ");
                 }
+                var mensagemResult = mensagem.ToString().Remove(mensagem.Length - 2);
+                _usuarioLogado.RegistrarLog(new Log(id, mensagemResult.ToString(), ip, maquina));
+                Commit();
             }
-            else
+            else if (signInManager.Context.User.Identity.IsAuthenticated)
             {
-                _usuarioLogado.RegistrarLog(new Log(id, result.Success, ip, maquina));
+                _usuarioLogado.RegistrarLog(new Log(id, result.Info, ip, maquina));
                 Commit();
             }
 

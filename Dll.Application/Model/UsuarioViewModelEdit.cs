@@ -8,6 +8,7 @@ namespace Dll.Application.Model
 {
     public class UsuarioViewModelEdit
     {
+
         [Key]
         [DisplayName("Id")]
         public string Id { get; set; }
@@ -40,5 +41,6 @@ namespace Dll.Application.Model
 
         [ScaffoldColumn(false)]
         public Domain.ValueObjects.ValidationResult ValidationResult { get; set; }
+
     }
 }

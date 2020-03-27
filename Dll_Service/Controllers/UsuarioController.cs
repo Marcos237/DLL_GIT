@@ -31,6 +31,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.AdicionarAspNetUser(model);
             }
+            _logger.Info("Registrar");
             return result;
         }
 
@@ -43,6 +44,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.BuscarTodosUsuario();
             }
+            _logger.Info("BuscarTodos");
             return result;
         }
         [HttpGet]
@@ -54,6 +56,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.BuscarPorId(id);
             }
+            _logger.Info("BuscarPorId");
             return result;
         }
         [HttpGet]
@@ -65,6 +68,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.BuscarPorEmail(email);
             }
+            _logger.Info("BuscarPorEmail");
             return result;
         }
         [HttpGet]
@@ -76,6 +80,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.BuscarPorCpf(cpf);
             }
+            _logger.Info("BuscarPorCpf");
             return result;
         }
 
@@ -88,6 +93,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.BuscarPorNome(nome);
             }
+            _logger.Info("BuscarPorNome");
             return result;
         }
 
@@ -100,6 +106,7 @@ namespace Dll.Service.Controllers
             {
                 result = _usuario.AtualizarAspNetUser(model);
             }
+            _logger.Info("Atualizar");
             return result;
         }
     }

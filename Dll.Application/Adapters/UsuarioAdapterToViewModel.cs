@@ -18,9 +18,12 @@ namespace Dll.Application.Adapters
                     Id = entity.Id,
                     UserName = entity.UserName,
                     Email = entity.Email,
-
-                    ValidationResult = entity.validateResult
                 };
+
+                if (entity.validateResult == null)
+                    _user.ValidationResult = new ValidationResult();
+                else
+                    _user.ValidationResult = entity.validateResult;
 
                 foreach (var item in entity.Usuario)
                 {

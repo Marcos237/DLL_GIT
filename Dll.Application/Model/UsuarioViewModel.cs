@@ -7,6 +7,12 @@ namespace Dll.Application.Model
 {
     public class UsuarioViewModel
     {
+
+        public UsuarioViewModel()
+        {
+            ValidationResult = new Domain.ValueObjects.ValidationResult();
+        }
+
         [Key]
         [DisplayName("Id")]
         public string Id { get; set; }

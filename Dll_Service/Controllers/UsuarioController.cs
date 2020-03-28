@@ -2,6 +2,7 @@
 using Dll.Application.Model;
 using Dll.Domain.DTO;
 using KissLog;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,12 +12,15 @@ namespace Dll.Service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController : ControllerBase
+    public class UsuarioController : BaseController
     {
+        private readonly IUsuarioLogadoAppService _log;
         private readonly IUsuarioAppService _usuario;
         private readonly ILogger _logger;
-        public UsuarioController(IUsuarioAppService usuario, ILogger logger)
+        public UsuarioController(IUsuarioAppService usuario, ILogger logger, IUsuarioLogadoAppService log)
+            :base(log)
         {
+            _log = log;
             _usuario = usuario;
             _logger = logger;
         }
@@ -30,6 +34,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.AdicionarAspNetUser(model);
+                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("Registrar");
             return result;
@@ -43,6 +48,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.BuscarTodosUsuario();
+                RegistrarLog(result.FirstOrDefault().ValidationResult);
             }
             _logger.Info("BuscarTodos");
             return result;
@@ -55,6 +61,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.BuscarPorId(id);
+                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("BuscarPorId");
             return result;
@@ -67,6 +74,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.BuscarPorEmail(email);
+                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("BuscarPorEmail");
             return result;
@@ -79,6 +87,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.BuscarPorCpf(cpf);
+                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("BuscarPorCpf");
             return result;
@@ -92,6 +101,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.BuscarPorNome(nome);
+                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("BuscarPorNome");
             return result;
@@ -105,6 +115,7 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.AtualizarAspNetUser(model);
+                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("Atualizar");
             return result;

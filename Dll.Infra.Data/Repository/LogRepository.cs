@@ -29,7 +29,7 @@ namespace Dll.Infra.Data.Repository
 
         public List<Log> BuscarTodosLog()
         {
-            var sql = @"SELECT A.ID,A.IDUSUARUIO, A.IP, A.MAQUINA, A.DATAINCLUSAO, A.DESCRICAO, A.DATALOG FROM USUARIOLOGADO AS A";
+            var sql = @"SELECT A.ID, A.USUARIOID, A.IP, A.NAVEGADOR, A.DESCRICAO, A.DATALOG FROM LOG AS A";
             var result = cn.Query<Log>(sql).ToList();
             return result;
         }

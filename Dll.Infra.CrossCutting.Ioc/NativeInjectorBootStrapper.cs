@@ -25,9 +25,10 @@ namespace Dll.Infra.CrossCutting.Ioc
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //AppService
+            services.AddScoped<ILoginAppService, LoginAppService>();
             services.AddScoped<IUsuarioAppService, UsuarioAppService>();
             services.AddScoped<IUsuarioLogadoAppService, UsuarioLogadoLogAppService>();
-            services.AddScoped<ILog, LogAppService>();
+
 
             //Dominio
 

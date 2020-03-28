@@ -5,15 +5,15 @@ namespace Dll.Domain.Entity
 {
     public partial class Log:Entity
     {
-        public int UsuarioId { get; private set; }
-        public DateTime DataLog { get; private set; }
+        public int UsuarioId { get;  set; }
+        public DateTime DataLog { get;  set; }
         public string Descricao { get; set; }
         public string IP { get; set; }
         public string Navegador { get; set; }
 
         public Log()
         {
-
+            DataLog = DateTime.Now;
         }
         public Log(int idusuarioLogado, string descricao, string ip, string maquina)
         {

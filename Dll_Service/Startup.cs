@@ -1,3 +1,4 @@
+using AutoMapper;
 using Dll.Service.Config;
 using Dll.Service.Extensions;
 using Dll.Web.Cadastro.Extensions;
@@ -41,6 +42,7 @@ namespace Dll_Service
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.ResolveDependece();
+
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(LogFilters)); 
@@ -53,7 +55,7 @@ namespace Dll_Service
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
+            services.AddAutoMapperSetup();
             services.AddDependencyInjectionSetup();
         }
 

@@ -25,16 +25,14 @@ namespace Dll.Application.Service
         private readonly IUsuarioService _usuarioService;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILog _log;
 
         public UsuarioAppService(IUsuarioService usuarioService, IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager, ILog log)
+            SignInManager<IdentityUser> signInManager)
             : base(unitOfWork)
         {
             _usuarioService = usuarioService;
             _userManager = userManager;
             _signInManager = signInManager;
-            _log = log;
         }
 
         public UsuarioViewModel AdicionarAspNetUser(UsuarioViewModel model)
@@ -64,7 +62,6 @@ namespace Dll.Application.Service
                 }
                 _userManager.DeleteAsync(user);
             }
-            _log.RegistrarLog(model.ValidationResult, _userManager, _signInManager);
             return model;
         }
 
@@ -85,7 +82,6 @@ namespace Dll.Application.Service
             {
                 model.ValidationResult.Info = "Atualizar Erro";
             }
-            _log.RegistrarLog(model.ValidationResult, _userManager, _signInManager);
             return model;
         }
 
@@ -96,7 +92,6 @@ namespace Dll.Application.Service
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
 
             result.ValidationResult.Info = "BuscarPorCpf";
-            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -106,7 +101,6 @@ namespace Dll.Application.Service
 
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
             result.ValidationResult.Info = "BuscarPorEmail";
-            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -116,7 +110,6 @@ namespace Dll.Application.Service
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
 
             result.ValidationResult.Info = "BuscarPorId";
-            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -126,7 +119,6 @@ namespace Dll.Application.Service
             var result = UsuarioAdapterToViewModel.EntityToViewModel(dados);
 
             result.ValidationResult.Info = "BuscarPorNome";
-            _log.RegistrarLog(result.ValidationResult, _userManager, _signInManager);
             return result;
         }
 
@@ -138,7 +130,6 @@ namespace Dll.Application.Service
             foreach (var item in result)
             {
                 item.ValidationResult.Info = "BuscarTodosUsuario";
-                _log.RegistrarLog(item.ValidationResult, _userManager, _signInManager);
             }
             return result;
         }

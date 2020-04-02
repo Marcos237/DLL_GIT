@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dll.Infra.Data.Migrations
 {
     [DbContext(typeof(UsuarioDbContext))]
-    [Migration("20200327024406_Log_02")]
-    partial class Log_02
+    [Migration("20200402043521_Initial_01")]
+    partial class Initial_01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,14 +29,14 @@ namespace Dll.Infra.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -48,17 +48,17 @@ namespace Dll.Infra.Data.Migrations
             modelBuilder.Entity("Dll.Domain.Entity.AspNetRoles", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -79,14 +79,14 @@ namespace Dll.Infra.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -98,19 +98,19 @@ namespace Dll.Infra.Data.Migrations
             modelBuilder.Entity("Dll.Domain.Entity.AspNetUserLogins", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -122,10 +122,10 @@ namespace Dll.Infra.Data.Migrations
             modelBuilder.Entity("Dll.Domain.Entity.AspNetUserRoles", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -137,18 +137,18 @@ namespace Dll.Infra.Data.Migrations
             modelBuilder.Entity("Dll.Domain.Entity.AspNetUserTokens", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(128);
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -158,16 +158,16 @@ namespace Dll.Infra.Data.Migrations
             modelBuilder.Entity("Dll.Domain.Entity.AspNetUsers", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
@@ -180,30 +180,30 @@ namespace Dll.Infra.Data.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -229,7 +229,6 @@ namespace Dll.Infra.Data.Migrations
                     b.Property<string>("Cep")
                         .IsRequired()
                         .HasColumnType("varchar(8)")
-                        .HasMaxLength(8)
                         .IsUnicode(false);
 
                     b.Property<int>("IdUsuaruio")
@@ -238,7 +237,6 @@ namespace Dll.Infra.Data.Migrations
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasColumnType("varchar(250)")
-                        .HasMaxLength(250)
                         .IsUnicode(false);
 
                     b.HasKey("Id");
@@ -260,7 +258,7 @@ namespace Dll.Infra.Data.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(max)")
+                        .HasColumnType("varchar(1000)")
                         .IsUnicode(false);
 
                     b.Property<string>("IP")
@@ -271,7 +269,7 @@ namespace Dll.Infra.Data.Migrations
 
                     b.Property<string>("Navegador")
                         .IsRequired()
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
@@ -294,15 +292,13 @@ namespace Dll.Infra.Data.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(200)")
-                        .HasMaxLength(200)
+                        .HasColumnType("varchar(250)")
                         .IsUnicode(false);
 
                     b.Property<string>("Sigla")
                         .IsRequired()
                         .HasColumnName("sigla")
                         .HasColumnType("varchar(2)")
-                        .HasMaxLength(2)
                         .IsUnicode(false);
 
                     b.HasKey("Id");
@@ -320,7 +316,6 @@ namespace Dll.Infra.Data.Migrations
                     b.Property<string>("Celular")
                         .IsRequired()
                         .HasColumnType("varchar(11)")
-                        .HasMaxLength(11)
                         .IsUnicode(false);
 
                     b.Property<int>("IdUsuaruio")
@@ -329,7 +324,6 @@ namespace Dll.Infra.Data.Migrations
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("varchar(11)")
-                        .HasMaxLength(11)
                         .IsUnicode(false);
 
                     b.HasKey("Id");
@@ -348,8 +342,12 @@ namespace Dll.Infra.Data.Migrations
 
                     b.Property<string>("IdUser")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(450);
+
+                    b.Property<string>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -363,7 +361,6 @@ namespace Dll.Infra.Data.Migrations
                     b.HasOne("Dll.Domain.Entity.AspNetRoles", "Role")
                         .WithMany("AspNetRoleClaims")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -372,7 +369,6 @@ namespace Dll.Infra.Data.Migrations
                     b.HasOne("Dll.Domain.Entity.AspNetUsers", "User")
                         .WithMany("AspNetUserClaims")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -381,7 +377,6 @@ namespace Dll.Infra.Data.Migrations
                     b.HasOne("Dll.Domain.Entity.AspNetUsers", "User")
                         .WithMany("AspNetUserLogins")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -390,13 +385,11 @@ namespace Dll.Infra.Data.Migrations
                     b.HasOne("Dll.Domain.Entity.AspNetRoles", "Role")
                         .WithMany("AspNetUserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dll.Domain.Entity.AspNetUsers", "User")
                         .WithMany("AspNetUserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -405,7 +398,6 @@ namespace Dll.Infra.Data.Migrations
                     b.HasOne("Dll.Domain.Entity.AspNetUsers", "User")
                         .WithMany("AspNetUserTokens")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -423,7 +415,6 @@ namespace Dll.Infra.Data.Migrations
                     b.HasOne("Dll.Domain.Entity.Usuario", null)
                         .WithMany("UsuarioLogado")
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -455,7 +446,6 @@ namespace Dll.Infra.Data.Migrations
                                 .IsRequired()
                                 .HasColumnName("CPF")
                                 .HasColumnType("varchar(11)")
-                                .HasMaxLength(11)
                                 .IsUnicode(false);
 
                             b1.HasKey("UsuarioId");

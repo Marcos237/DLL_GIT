@@ -1,5 +1,4 @@
-﻿using Dll.Infra.CorssCutting.Identity.Models;
-using Dll.Infra.Data;
+﻿using Dll.Infra.Data;
 using Dll.Infra.Data.Context;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

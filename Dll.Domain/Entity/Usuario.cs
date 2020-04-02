@@ -8,6 +8,7 @@ namespace Dll.Domain.Entity
     {
         public string IdUser { get; set; }
         public CPF Cpf { get; set; }
+        public string Imagem { get; set; }
         public ValidationResult ValidationResult { get; private set; }
         public virtual AspNetUsers IdUserNavigation { get; set; }
         public virtual ICollection<Endereco> Endereco { get; set; }

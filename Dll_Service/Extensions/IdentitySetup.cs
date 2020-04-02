@@ -1,6 +1,4 @@
-﻿using Dll.Infra.CorssCutting.Identity.Autorizations;
-using Dll.Infra.CorssCutting.Identity.Models;
-using Dll.Infra.Data.Context;
+﻿using Dll.Infra.Data.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

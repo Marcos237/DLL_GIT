@@ -1,6 +1,5 @@
 ﻿using Dll.Domain.Entity;
 using Dll.Domain.Specification;
-using Dll.Infra.CorssCutting.Identity.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -26,7 +26,7 @@ namespace Dll.Service.Controllers
         public void RegistrarLog(ValidationResult result)
         {
             //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var i = 1;
+            var i = 4;
             var id = i;
             var ip = _httpContextAccessor.HttpContext.Connection.LocalIpAddress.ToString();
             var maquina = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"];

@@ -18,8 +18,9 @@ namespace Dll.Service.Controllers
         private readonly IUsuarioLogadoAppService _usuario;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BaseController(IUsuarioLogadoAppService usuario)
+        public BaseController(IUsuarioLogadoAppService usuario, IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _usuario = usuario;
         }
         public void RegistrarLog(ValidationResult result)
@@ -40,13 +41,13 @@ namespace Dll.Service.Controllers
                 }
                 var mensagemResult = mensagem.ToString().Remove(mensagem.Length - 2);
 
-                var log = new LogViewModel() { Id = id, Descricao = mensagemResult.ToString(), IP = ip, Navegador = maquina };
+                var log = new LogViewModel() { UsuarioId = id, Descricao = mensagemResult.ToString(), IP = ip, Navegador = maquina };
                 _usuario.RegistrarLog(log);
 
             }
             else 
             {
-                var log = new LogViewModel() { Id = id, Descricao = result.Info, IP = ip, Navegador = maquina };
+                var log = new LogViewModel() { UsuarioId = id, Descricao = result.Info, IP = ip, Navegador = maquina };
                 _usuario.RegistrarLog(log);
             }
 

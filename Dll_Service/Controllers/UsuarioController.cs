@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Dll.Service.Controllers
 {
@@ -17,8 +18,8 @@ namespace Dll.Service.Controllers
         private readonly IUsuarioLogadoAppService _log;
         private readonly IUsuarioAppService _usuario;
         private readonly ILogger _logger;
-        public UsuarioController(IUsuarioAppService usuario, ILogger logger, IUsuarioLogadoAppService log)
-            :base(log)
+        public UsuarioController(IUsuarioAppService usuario, ILogger logger, IUsuarioLogadoAppService log, IHttpContextAccessor httpContextAccessor)
+            :base(log, httpContextAccessor)
         {
             _log = log;
             _usuario = usuario;
@@ -115,7 +116,6 @@ namespace Dll.Service.Controllers
             if (ModelState.IsValid)
             {
                 result = _usuario.AtualizarAspNetUser(model);
-                RegistrarLog(result.ValidationResult);
             }
             _logger.Info("Atualizar");
             return result;

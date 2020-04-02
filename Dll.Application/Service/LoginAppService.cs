@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Dll.Application.Service
 {
@@ -21,10 +22,11 @@ namespace Dll.Application.Service
             _signInManager = signInManager;
             _userManager = userManager;
         }
-        public bool Login(LoginViewModel model)
+        public async Task<bool> Login(LoginViewModel model)
         {
-            var result =  _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
-            if (result.Result.Succeeded)
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
+
+            if (result.Succeeded)
             {
                 model.ValidationResult = new ValidationResult();
                 model.ValidationResult.Info = "Usuário logado com sucesso.";

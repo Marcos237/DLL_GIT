@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dll.Domain.Entity
 {
-    public class Entity
+    public abstract class Entity
     {
         public int Id { get; set; }
         public ValidationResult validateResult { get; set; }

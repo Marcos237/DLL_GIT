@@ -1,6 +1,8 @@
 ﻿using Dll.Application.Interfaces;
 using Dll.Application.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Dll.Service.Controllers
 {
@@ -10,33 +12,31 @@ namespace Dll.Service.Controllers
     {
         private readonly IUsuarioLogadoAppService _log;
         private readonly ILoginAppService _login; 
-        public LoginController(ILoginAppService login, IUsuarioLogadoAppService log)
-            :base(log)
+        public LoginController(ILoginAppService login, IUsuarioLogadoAppService log, IHttpContextAccessor httpContextAccessor)
+            :base(log,  httpContextAccessor)
         {
             _log = log;
             _login = login;
         }
         [HttpPost]
         [Route("Login")]
-        public bool RegistrarLog(LoginViewModel model)
+        public async Task<bool> RegistrarLogin(LoginViewModel model)
         {
             var result = false;
             if (ModelState.IsValid)
             {
-                if (_login.Login(model))
+                result = await _login.Login(model);
+                if (result)
                 {
-                    RegistrarLog(model);
                     result = true;
                 }
 
                 else
-                {
-                    RegistrarLog(model);
                     result = false;
-                }
-
             }
-            return result;
+            RegistrarLog(model.ValidationResult);
+
+                return result;
         }
     }
 }

@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dll.Domain\Dll.Domain.csproj" />
-    <ProjectReference Include="..\Infra.Identity\Dll.Infra.CorssCutting.Identity.csproj" />
   </ItemGroup>
 
 </Project>

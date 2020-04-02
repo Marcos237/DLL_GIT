@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Dll.Application\Dll.Application.csproj" />
     <ProjectReference Include="..\Dll.Infra.Data\Dll.Infra.Data.csproj" />
-    <ProjectReference Include="..\Infra.Identity\Dll.Infra.CorssCutting.Identity.csproj" />
   </ItemGroup>
 
   <ItemGroup>
